@@ -3,6 +3,7 @@
 guess a word letter by letter. The player has a limited number of lives, and 
 for each incorrect guess, a life is deducted. The objective is to guess the 
 word before running out of lives.*
+---
 ### Sample run
 ````
 You have 8 lives left and you have already used  
