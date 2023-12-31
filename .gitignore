@@ -3,3 +3,5 @@ hangman/__pycache__/
 computer_guesses_random_number/.idea/
 rock,paper,scissors/.idea/
 hangman/json.py
+tictactoe/.idea/
+tictactoe/__pycache__/
