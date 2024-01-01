@@ -1,7 +1,4 @@
 import random
-from board import Board
-
-b = Board()
 
 
 class Player:
@@ -16,13 +13,13 @@ class HumanPlayer(Player):
     def __init__(self, letter):
         super().__init__(letter)
 
-    def get_move(self):
+    def get_move(self, game):
         flag = True
         box = None
         while flag:
-            box = int(input(f'{self.letter} \'s turn (0-8):'))
             try:
-                if box not in b.available_moves():
+                box = int(input(f'{self.letter} \'s turn (0-8):'))
+                if box not in game.available_moves():
                     raise ValueError
 
                 flag = False
@@ -35,6 +32,6 @@ class ComputerPlayer(Player):
     def __init__(self, letter):
         super().__init__(letter)
 
-    def get_move(self):
-        box = random.choice(b.available_moves())
+    def get_move(self, game):
+        box = random.choice(game.available_moves())
         return box

@@ -24,7 +24,19 @@ class Board:
     def make_move(self, box, letter):
         if self.board[box] == ' ':
             self.board[box] = letter
+            if self.winner(box, letter):
+                self.current_winner = letter
             return True
+        return False
+
+    def winner(self, box, letter):
+        # Row wise winner
+        for row in [self.board[i*3:(i+1)*3] for i in range(3)]:
+            if letter in row[0] and letter in row[1] and letter in row[2]:
+                return True
+
+        # Column wise winner
+
         return False
 
     @staticmethod
@@ -32,17 +44,24 @@ class Board:
         num_board = [[str(j) for j in range(i * 3, (i + 1) * 3)] for i in range(3)]
         for row in num_board:
             print(' | '.join(row))
+        print('')
 
-    def play(self, x_player, o_player):
+    def play(self, game, x_player, o_player):
         letter = self.first_turn()
         self.draw()
         while ' ' in self.board:
             if letter == 'X':
-                box = x_player.get_move()
+                box = x_player.get_move(game)
             else:
-                box = o_player.get_move()
+                box = o_player.get_move(game)
             if self.make_move(box, letter):
                 print(f'{letter} player made a move to box {box}')
                 self.draw()
                 print('')
+
+            if self.current_winner in ['X', 'O']:
+                print(f'{self.current_winner} wins the game!!!')
+                exit()
             letter = 'O' if letter == 'X' else 'X'
+
+        print("It's a tie!!")
